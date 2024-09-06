@@ -27,14 +27,12 @@ class MQTTScreen : public Screen
       lv_obj_align(label_screen, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
 
       label_enable_alarm = lv_label_create(lv_scr_act(), NULL);
-      lv_label_set_text(label_enable_alarm , "Alarm:");
-      lv_obj_align(btn1, NULL, LV_ALIGN_CENTER, -55, -50);
+      lv_label_set_text(label_enable_alarm, "Enable Alarm:");
+      lv_obj_align(label_enable_alarm, NULL, LV_ALIGN_CENTER, -55, -50);
 
-      btn2 = lv_btn_create(lv_scr_act(), NULL);
-      lv_obj_set_event_cb(btn2, lv_event_handler);
-      lv_obj_align(btn2, NULL, LV_ALIGN_CENTER, 55, -50);
-      btn2_label = lv_label_create(btn2, NULL);
-      lv_label_set_text(btn2_label, "Time");
+      sw_enable_alarm = lv_sw_create(lv_scr_act(), NULL);
+      lv_obj_set_event_cb(sw_enable_alarm, lv_event_handler);
+      lv_obj_align(sw_enable_alarm, NULL, LV_ALIGN_CENTER, 55, -50);
 
       btn3 = lv_btn_create(lv_scr_act(), NULL);
       lv_obj_set_event_cb(btn3, lv_event_handler);
@@ -80,7 +78,8 @@ class MQTTScreen : public Screen
     }
 
   private:
-    lv_obj_t *label_screen;
+    lv_obj_t *label_screen, *label_enable_alarm;
+    lv_obj_t *sw_enable_alarm;
     lv_obj_t *btn1, *btn2, *btn1_label, *btn2_label;
     lv_obj_t *btn3, *btn4, *btn3_label, *btn4_label;
 };
