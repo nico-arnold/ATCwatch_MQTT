@@ -30,11 +30,9 @@ class MQTTScreen : public Screen
       lv_label_set_text(label_enable_alarm , "Alarm:");
       lv_obj_align(btn1, NULL, LV_ALIGN_CENTER, -55, -50);
 
-      btn2 = lv_btn_create(lv_scr_act(), NULL);
-      lv_obj_set_event_cb(btn2, lv_event_handler);
-      lv_obj_align(btn2, NULL, LV_ALIGN_CENTER, 55, -50);
-      btn2_label = lv_label_create(btn2, NULL);
-      lv_label_set_text(btn2_label, "Time");
+      switch_enable_alarm = lv_sw_create(lv_scr_act(), NULL);
+      lv_obj_set_event_cb(switch_enable_alarm, lv_event_handler);
+      lv_obj_align(switch_enable_alarm, NULL, LV_ALIGN_CENTER, 55, -50);
 
       btn3 = lv_btn_create(lv_scr_act(), NULL);
       lv_obj_set_event_cb(btn3, lv_event_handler);
@@ -68,8 +66,13 @@ class MQTTScreen : public Screen
 
     virtual void lv_event_class(lv_obj_t * object, lv_event_t event)
     {
-      if (object == btn1 && event == LV_EVENT_SHORT_CLICKED) {
-        change_screen((Screen*)&settingsDateScreen);
+      if (object == switch_enable_alarm && event == LV_EVENT_VALUE_CHANGED ) {
+        if (lv_sw_get_state(switch_enable_alarm)){
+          //enabled: do nothing
+        }else{
+          //enabled: back to homescreen
+          display_home();
+        }
       } else if (object == btn2 && event == LV_EVENT_SHORT_CLICKED) {
         change_screen((Screen*)&settingsTimeScreen);
       } else if (object == btn3 && event == LV_EVENT_SHORT_CLICKED) {
@@ -81,6 +84,7 @@ class MQTTScreen : public Screen
 
   private:
     lv_obj_t *label_screen, *label_enable_alarm;
+    lv_obj_t *switch_enable_alarm;
     lv_obj_t *btn1, *btn2, *btn1_label, *btn2_label;
     lv_obj_t *btn3, *btn4, *btn3_label, *btn4_label;
 };
