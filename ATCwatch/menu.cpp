@@ -25,7 +25,7 @@
 #include "menu_Settings_Date.h"
 #include "menu_Settings_Color.h"
 #include "menu_Settings_Brightness.h"
-#include "menu_Animation.h"
+#include "menu_MQTT.h"
 #include "menu_infos.h"
 #include "menu_Accl.h"
 #include "menu_App.h"
@@ -57,7 +57,7 @@ app_struct updateApp = {"Bootloader", &IsymbolBootloader, &updateScreen};
 app_struct offApp = {"Shutdown", &IsymbolShutdown, &offScreen};
 app_struct settingsApp = {"Settings", &IsymbolSettings, &settingsScreen};
 
-app_struct animationApp = {"Animation", &IsymbolAnimation, &animationScreen};
+app_struct animationApp = {"MQTT", &IsymbolMQTT, &mqttScreen};
 app_struct infosApp = {"Infos", &IsymbolInfos, &infosScreen};
 app_struct acclApp = {"Accl", &IsymbolAccl , &acclScreen};
 app_struct demoApp = {"Demo", &IsymbolChart , &demoScreen};
