@@ -80,7 +80,7 @@ class MQTTScreen : public Screen
     }
 
   private:
-    lv_obj_t *label_screen;
+    lv_obj_t *label_screen, *label_enable_alarm;
     lv_obj_t *btn1, *btn2, *btn1_label, *btn2_label;
     lv_obj_t *btn3, *btn4, *btn3_label, *btn4_label;
 };
