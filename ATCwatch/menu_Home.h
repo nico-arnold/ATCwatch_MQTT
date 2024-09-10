@@ -20,6 +20,7 @@
 #include "fonts.h"
 #include "sleep.h"
 #include <lvgl.h>
+//#include "menu_Alarm.h"
 
 
 class HomeScreen : public Screen
@@ -134,7 +135,8 @@ class HomeScreen : public Screen
 
     virtual void down()
     {
-      dec_vars_menu();
+      change_screen((Screen*)&alarmScreen);
+      //dec_vars_menu();
     }
 
     virtual void left()
