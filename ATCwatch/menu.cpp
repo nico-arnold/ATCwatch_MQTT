@@ -39,6 +39,8 @@
 #include "menu_Settings.h"
 #include <lvgl.h>
 
+#include "Alarm_Screen.h"
+
 long last_main_run;
 int vars_menu = -1;
 int vars_max_menu = 4;
