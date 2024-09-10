@@ -12,6 +12,7 @@
 #include "backlight.h"
 #include "bootloader.h"
 #include "display.h"
+#include "menu_Alarm.h"
 #include "menu_Boot.h"
 #include "menu_Home.h"
 #include "menu_Heart.h"
