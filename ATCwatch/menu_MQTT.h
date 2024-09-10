@@ -6,6 +6,7 @@
 
 #pragma once
 #include "Arduino.h"
+#include "ble.h"
 #include "class.h"
 #include "images.h"
 #include "menu.h"
@@ -66,8 +67,12 @@ class MQTTScreen : public Screen
 
     virtual void lv_event_class(lv_obj_t * object, lv_event_t event)
     {
-      if (object == btn1 && event == LV_EVENT_SHORT_CLICKED) {
-        change_screen((Screen*)&settingsDateScreen);
+      if (object == sw_enable_alarm && event == LV_EVENT_VALUE_CHANGED) {
+        if (lv_sw_get_state(sw_enable_alarm)){
+          ble_write("AT+BEEP");
+        }else{
+          display_home();
+        }
       } else if (object == btn2 && event == LV_EVENT_SHORT_CLICKED) {
         change_screen((Screen*)&settingsTimeScreen);
       } else if (object == btn3 && event == LV_EVENT_SHORT_CLICKED) {
