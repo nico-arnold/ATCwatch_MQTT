@@ -16,6 +16,9 @@
 #include "push.h"
 #include "accl.h"
 
+#include "menu.h"
+#include "alarm.h"
+
 BLEPeripheral                   blePeripheral           = BLEPeripheral();
 BLEService                      main_service     = BLEService("190A");
 BLECharacteristic   TXchar        = BLECharacteristic("0002", BLENotify, 20);
@@ -151,5 +154,10 @@ void filterCmd(String Command) {
     show_msgBody(Command.substring(8));
   } else if (Command.substring(0, 8) == "AT+TICK=") {
     show_msgBody(Command.substring(8));
+  } else if (Command.substring(0, 9) == "AT+ALMON=") {
+    set_motor_ms(500);
+    //showAlarmScreen.set_alarm_level(Command.substring(10).toInt());
+    //change_screen((Screen*)&showAlarmScreen);
+    alarm();
   }
 }
