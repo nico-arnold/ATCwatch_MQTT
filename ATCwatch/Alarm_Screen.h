@@ -32,15 +32,38 @@ class ShowAlarmScreen : public Screen
       lv_label_set_text(label_screen, "ALARM");
       lv_obj_align(label_screen, NULL, LV_ALIGN_IN_TOP_LEFT, 0, 0);
 
+      lv_style_copy( &st, &lv_style_plain );
+      st.text.color = lv_color_hsv_to_rgb(10, 5, 95);
+      st.text.font = &mksd50;
+
       label_alarm_lvl = lv_label_create(lv_scr_act(), NULL);
-      lv_label_set_text(label_alarm_lvl, String(alarm_level).c_str());
-      lv_obj_align(label_alarm_lvl, NULL, LV_ALIGN_CENTER, 0, 0);
+      lv_obj_set_style( label_alarm_lvl, &st );
+      lv_label_set_text(label_alarm_lvl, "4");
+      lv_obj_align(label_alarm_lvl, lv_scr_act(), LV_ALIGN_CENTER, -20, 20);
     }
 	
-	virtual void set_alarm_level(int lvl){
-		alarm_level = lvl;
-		lv_label_set_text(label_alarm_lvl, "TRIGGERED");//String(alarm_level).c_str());
-	}
+  	virtual void set_alarm_level(int lvl){
+      alarm_level = lvl;
+      switch(alarm_level){
+        case 0:
+          st.text.color = lv_color_hex3(0x146152);
+          lv_label_set_text(label_alarm_lvl, "0");
+        break;
+        case 1:
+          st.text.color = lv_color_hex3(0xB4CF66);
+          lv_label_set_text(label_alarm_lvl, "1");
+        break;
+        case 2:
+          st.text.color = lv_color_hex3(0xFFEC5C);
+          lv_label_set_text(label_alarm_lvl, "2");
+        break;
+        case 3:
+          st.text.color = lv_color_hex3(0xFF5A33);
+          lv_label_set_text(label_alarm_lvl, "3");
+        break;
+      }
+      lv_obj_set_style( label_alarm_lvl, &st );
+  	}
 
     virtual void main()
     {
@@ -80,6 +103,7 @@ class ShowAlarmScreen : public Screen
 
   private:
     lv_obj_t *label_screen, *label_alarm_lvl;
+    lv_style_t st;
 };
 
 ShowAlarmScreen showAlarmScreen;
