@@ -26,6 +26,9 @@ class ShowAlarmScreen : public Screen
   
 	int alarm_level = 0;
   int displayed_alarm_level = 4;
+  volatile long next_vibration = 0;
+  const int vibration_time = 50;
+  const int vibration_pause = 100;
   
     virtual void pre()
     {
@@ -51,20 +54,24 @@ class ShowAlarmScreen : public Screen
             lv_label_set_text(label_alarm_lvl, "0");
           break;
           case 1:
-            st.text.color = lv_color_hex3(0xB4CF66);
+            st.text.color = lv_color_hex(0xB4CF66);
             lv_label_set_text(label_alarm_lvl, "1");
           break;
           case 2:
-            st.text.color = lv_color_hex3(0xFFEC5C);
+            st.text.color = lv_color_hex(0xFFEC5C);
             lv_label_set_text(label_alarm_lvl, "2");
           break;
           case 3:
-            st.text.color = lv_color_hex3(0xFF5A33);
+            st.text.color = lv_color_hex(0xFF5A33);
             lv_label_set_text(label_alarm_lvl, "3");
           break;
         }
         lv_obj_set_style( label_alarm_lvl, &st );
         displayed_alarm_level = alarm_level;
+      }
+      if (millis() > next_vibration){
+        set_motor_ms(vibration_time);
+        next_vibration = millis() + vibration_time + vibration_pause;
       }
     }
 	
@@ -118,7 +125,7 @@ void alarm(int lvl){
   sleep_up(WAKEUP_BLEPUSH);
   change_screen((Screen*)&showAlarmScreen);
   showAlarmScreen.set_alarm_level(lvl);
-  set_motor_ms(1000);
+  //set_motor_ms(1000);
   set_sleep_time();
 }
 
