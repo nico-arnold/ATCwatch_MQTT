@@ -158,6 +158,6 @@ void filterCmd(String Command) {
     set_motor_ms(500);
     //showAlarmScreen.set_alarm_level(Command.substring(10).toInt());
     //change_screen((Screen*)&showAlarmScreen);
-    alarm();
+    alarm(Command.substring(10).toInt());
   }
 }
