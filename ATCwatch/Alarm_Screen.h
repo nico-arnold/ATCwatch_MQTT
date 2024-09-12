@@ -44,25 +44,26 @@ class ShowAlarmScreen : public Screen
 	
   	virtual void set_alarm_level(int lvl){
       alarm_level = lvl;
-      switch(alarm_level){
+      /*switch(alarm_level){
         case 0:
-          st.text.color = lv_color_hex3(0x146152);
+          //st.text.color = lv_color_hex3(0x146152);
           lv_label_set_text(label_alarm_lvl, "0");
         break;
         case 1:
-          st.text.color = lv_color_hex3(0xB4CF66);
+          //st.text.color = lv_color_hex3(0xB4CF66);
           lv_label_set_text(label_alarm_lvl, "1");
         break;
         case 2:
-          st.text.color = lv_color_hex3(0xFFEC5C);
+          //st.text.color = lv_color_hex3(0xFFEC5C);
           lv_label_set_text(label_alarm_lvl, "2");
         break;
         case 3:
-          st.text.color = lv_color_hex3(0xFF5A33);
+          //st.text.color = lv_color_hex3(0xFF5A33);
           lv_label_set_text(label_alarm_lvl, "3");
         break;
       }
-      lv_obj_set_style( label_alarm_lvl, &st );
+      */
+      //lv_obj_set_style( label_alarm_lvl, &st );
   	}
 
     virtual void main()
@@ -111,8 +112,12 @@ ShowAlarmScreen showAlarmScreen;
 #ifndef _ALARM_SCREEN_H_
 #define _ALARM_SCREEN_H_
 
-void alarm(){
-	change_screen((Screen*)&showAlarmScreen);
+void alarm(int lvl){
+  sleep_up(WAKEUP_BLEPUSH);
+  change_screen((Screen*)&showAlarmScreen);
+  showAlarmScreen.set_alarm_level(lvl);
+  set_motor_ms(1000);
+  set_sleep_time();
 }
 
 #endif
