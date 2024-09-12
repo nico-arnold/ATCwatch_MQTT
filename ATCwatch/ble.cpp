@@ -155,9 +155,8 @@ void filterCmd(String Command) {
   } else if (Command.substring(0, 8) == "AT+TICK=") {
     show_msgBody(Command.substring(8));
   } else if (Command.substring(0, 9) == "AT+ALMON=") {
-    set_motor_ms(500);
     //showAlarmScreen.set_alarm_level(Command.substring(10).toInt());
     //change_screen((Screen*)&showAlarmScreen);
-    alarm(Command.substring(10).toInt());
+    alarm(Command.substring(9).toInt());
   }
 }

@@ -25,6 +25,7 @@ class ShowAlarmScreen : public Screen
   public:
   
 	int alarm_level = 0;
+  int displayed_alarm_level = 4;
   
     virtual void pre()
     {
@@ -41,34 +42,35 @@ class ShowAlarmScreen : public Screen
       lv_label_set_text(label_alarm_lvl, "4");
       lv_obj_align(label_alarm_lvl, lv_scr_act(), LV_ALIGN_CENTER, -20, 20);
     }
+
+    virtual void main(){
+      if (alarm_level != displayed_alarm_level){
+        switch(alarm_level){
+          case 0:
+            st.text.color = lv_color_hex3(0x146152);
+            lv_label_set_text(label_alarm_lvl, "0");
+          break;
+          case 1:
+            st.text.color = lv_color_hex3(0xB4CF66);
+            lv_label_set_text(label_alarm_lvl, "1");
+          break;
+          case 2:
+            st.text.color = lv_color_hex3(0xFFEC5C);
+            lv_label_set_text(label_alarm_lvl, "2");
+          break;
+          case 3:
+            st.text.color = lv_color_hex3(0xFF5A33);
+            lv_label_set_text(label_alarm_lvl, "3");
+          break;
+        }
+        lv_obj_set_style( label_alarm_lvl, &st );
+        displayed_alarm_level = alarm_level;
+      }
+    }
 	
   	virtual void set_alarm_level(int lvl){
       alarm_level = lvl;
-      /*switch(alarm_level){
-        case 0:
-          //st.text.color = lv_color_hex3(0x146152);
-          lv_label_set_text(label_alarm_lvl, "0");
-        break;
-        case 1:
-          //st.text.color = lv_color_hex3(0xB4CF66);
-          lv_label_set_text(label_alarm_lvl, "1");
-        break;
-        case 2:
-          //st.text.color = lv_color_hex3(0xFFEC5C);
-          lv_label_set_text(label_alarm_lvl, "2");
-        break;
-        case 3:
-          //st.text.color = lv_color_hex3(0xFF5A33);
-          lv_label_set_text(label_alarm_lvl, "3");
-        break;
-      }
-      */
-      //lv_obj_set_style( label_alarm_lvl, &st );
   	}
-
-    virtual void main()
-    {
-    }
 
     virtual void up()
     {
