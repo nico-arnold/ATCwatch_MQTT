@@ -1,6 +1,6 @@
 #ifndef _ALARM_H_
 #define _ALARM_H_
 
-void alarm();
+void alarm(int lvl);
 
 #endif

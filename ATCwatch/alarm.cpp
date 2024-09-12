@@ -8,7 +8,8 @@
 #ifndef _ALARM_H_
 #define _ALARM_H_
 
-void alarm(){
+void alarm(int lvl){
+  showAlarmScreen.set_alarm_level(lvl);
   change_screen((Screen*)&showAlarmScreen);
 }
 
