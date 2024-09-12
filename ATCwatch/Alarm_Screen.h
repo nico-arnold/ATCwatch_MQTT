@@ -50,7 +50,7 @@ class ShowAlarmScreen : public Screen
       if (alarm_level != displayed_alarm_level){
         switch(alarm_level){
           case 0:
-            st.text.color = lv_color_hex3(0x146152);
+            st.text.color = lv_color_hex(0x146152);
             lv_label_set_text(label_alarm_lvl, "0");
           break;
           case 1:
